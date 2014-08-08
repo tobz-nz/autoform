@@ -1,5 +1,7 @@
 <?php namespace Tobz\Autoform\Traits;
 
+use Exception;
+
 trait InputFieldTrait
 {
     use FieldTrait;
