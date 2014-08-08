@@ -26,7 +26,7 @@ class Autoform implements IteratorAggregate, Countable
      */
     public function __construct($attributes = [], $fields = null)
     {
-        $this->attributes = array_merge($this->attributes, $attributes);
+        $this->attributes = $attributes + $this->attributes;
 
         // add/create fields
         if ($fields instanceof Collection) {
@@ -88,7 +88,7 @@ class Autoform implements IteratorAggregate, Countable
     /**
      * Add a field
      *
-     * @param FieldInterface $field
+     * @param Tobz\Autoform\Contracts\FieldInterface $field
      */
     public function add(FieldInterface $field)
     {
@@ -98,7 +98,7 @@ class Autoform implements IteratorAggregate, Countable
     /**
      * Bind a Describable objects fields
      *
-     * @param  DescribableInterface $model
+     * @param Tobz\Autoform\Contracts\DescribableInterface $model
      *
      * @return Autoform
      */
@@ -122,7 +122,7 @@ class Autoform implements IteratorAggregate, Countable
     {
         $output = [];
         foreach ($this->fields as $field) {
-            if (!count($list) || in_array($field->name, $list)) {
+            if (!count($list) || in_array($field->getName(), $list)) {
                 $output[] = $field;
             }
         }
@@ -139,13 +139,7 @@ class Autoform implements IteratorAggregate, Countable
      */
     public function renderFields($renderList = [])
     {
-        $output = [];
-        foreach ($this->getFields($renderList) as $field) {
-            if (!count($renderList) || in_array($field->name, $renderList)) {
-                $output[] = (string) $field;
-            }
-        }
-
+        $output = $this->getFields($renderList);
         return implode("\n", $output);
     }
 

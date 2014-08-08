@@ -34,5 +34,14 @@ class FormTest extends \TestCase
         $autoform = new Autoform(['action' => '/save'], new Collection([$field]));
         $this->assertCount(1, $autoform);
         $this->assertEquals('<input type="hidden" id="test1" name="test1" value="0" required />', $autoform->renderFields());
+
+        $autoform->add(new InputField('test2'));
+        $this->assertEquals(
+            '<input type="hidden" id="test1" name="test1" value="0" required />
+<input type="text" id="test2" name="test2" value="" />',
+            $autoform->renderFields()
+        );
+
+        $this->assertEquals('<input type="text" id="test2" name="test2" value="" />', $autoform->renderFields(['test2']));
     }
 }
