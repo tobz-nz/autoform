@@ -20,5 +20,19 @@ class FormTest extends \TestCase
         $this->assertEquals('<form action="/save" method="post">'."\n", $autoform->open());
         $this->assertEquals("</form>\n", $autoform->close());
         $this->assertCount(0, $autoform);
+
+
+        $field = [
+            'Field' => 'test1',
+            'Type' => "int(100)",
+            'Null' => 'NO',
+            'Key' => 'PRI',
+            'Default' => '0',
+            'Extra' => ''
+        ];
+
+        $autoform = new Autoform(['action' => '/save'], new Collection([$field]));
+        $this->assertCount(1, $autoform);
+        $this->assertEquals('<input type="hidden" id="test1" name="test1" value="0" required />', $autoform->renderFields());
     }
 }

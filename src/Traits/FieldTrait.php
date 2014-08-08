@@ -65,7 +65,7 @@ trait FieldTrait
      * @param array $attributes        An array of attributes
      * @param string $type
      */
-    private function boot($name, $value = '', $id = null, $attributes = [], $type = 'text')
+    private function boot($name, $value = '', $type = 'text', $attributes = [])
     {
         // set the attributes array
         if (is_array($name)) {
@@ -73,9 +73,9 @@ trait FieldTrait
                 throw new Exception('A name is required');
             }
 
-            $this->attributes = array_merge($this->attributes, $name) + $attributes;
+            $this->attributes = $name + $this->attributes + $attributes;
         } else {
-            $this->attributes = array_merge($attributes, $this->attributes);
+            $this->attributes = $attributes + $this->attributes;
         }
 
         // set the label
@@ -90,12 +90,12 @@ trait FieldTrait
         }
 
         // set the id
-        if ($id || !$this->getId()) {
-            $this->setId($id?:$this->getName());
+        if (!$this->getId()) {
+            $this->setId($this->getName());
         }
 
         // set the value
-        if ($value || !$this->getValue()) {
+        if ($value !== false || $this->getValue() !== false) {
             $this->setValue($value);
         }
     }

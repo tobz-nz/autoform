@@ -13,16 +13,16 @@ trait InputFieldTrait
      * @param array $attributes        An array of attributes
      * @param string $type
      */
-    public function boot($name, $value = '', $id = null, $attributes = [], $type = 'text')
+    public function boot($name, $value = '', $type = 'text', $attributes = [])
     {
         if (is_array($name)) {
             if (!isset($name['name'])) {
                 throw new Exception('A name is required');
             }
 
-            $this->attributes = array_merge($this->attributes, $name) + $attributes;
+            $this->attributes = $name + $attributes + $this->attributes;
         } else {
-            $this->attributes = array_merge($attributes, $this->attributes);
+            $this->attributes = $attributes + $this->attributes;
         }
 
         if (!$this->getType()) {
@@ -30,15 +30,27 @@ trait InputFieldTrait
         }
 
         if (!$this->getName()) {
-            $this->setName($name ?: $this->attributes['name']);
+            $this->setName($name);
         }
 
-        if ($id || !$this->getId()) {
-            $this->setId($id?:$this->getName());
+        if (!$this->getId()) {
+            $this->setId($this->getName());
         }
 
-        if ($value || !$this->getValue()) {
+        if ($value) {
             $this->setValue($value);
+        }
+    }
+
+    /**
+     * Set the type. Can only be from defined values
+     *
+     * @param string $value
+     */
+    public function setType($value)
+    {
+        if (in_array($value, $this->types)) {
+            $this->attributes['type'] = $value;
         }
     }
 }

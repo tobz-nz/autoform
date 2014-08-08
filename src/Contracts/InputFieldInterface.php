@@ -3,6 +3,7 @@
 interface InputFieldInterface
 {
 
+    public function __construct($name, $value = '', $type = 'text', $attributes = []);
     public function __toString();
 
     public function setId($type);

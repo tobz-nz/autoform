@@ -47,9 +47,9 @@ class InputField implements FieldInterface
      * @param array $attributes        An array of attributes
      * @param string $type
      */
-    public function __construct($name, $value = '', $id = null, $attributes = [], $type = 'text')
+    public function __construct($name, $value = '', $type = 'text', $attributes = [])
     {
-        $this->boot($name, $value, $id, $attributes, $type);
+        $this->boot($name, $value, $type, $attributes);
     }
 
     /**
@@ -67,13 +67,6 @@ class InputField implements FieldInterface
             $this->getValue(),
             $this->attributeString(['type', 'id', 'name', 'value'])
         );
-    }
-
-    public function setType($value)
-    {
-        if (in_array($value, $this->types)) {
-            $this->attributes['type'] = $value;
-        }
     }
 
     public function getType()

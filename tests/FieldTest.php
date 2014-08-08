@@ -43,10 +43,9 @@ class FieldTest extends \TestCase
         $this->assertEquals('<input type="text" id="test2" name="test2" value="test2" />', (string) $field);
 
         $field = new InputField([
-            'id' => 'id3',
             'name' => 'name3',
             'value' => 'value3',
-        ], 'myValue', 'myId', ['data-test' => 'yes', 'name' => 'teset4']);
+        ], 'myValue', 'text', ['data-test' => 'yes', 'name' => 'teset4', 'id' => 'myId']);
         $this->assertEquals('name3', $field->getName());
         $this->assertEquals('myId', $field->getId());
         $this->assertEquals('myValue', $field->getValue());

@@ -31,10 +31,10 @@ class TextField implements InputFieldInterface, FieldInterface
      * @param array $attributes        An array of attributes
      * @param string $type
      */
-    public function __construct($name, $value = '', $id = null, $attributes = [], $type = 'text')
+    public function __construct($name, $value = '', $type = 'textarea', $attributes = [])
     {
         $attributes = $this->attributes + $attributes; // Include default attribute
-        $this->boot($name, $value, $id, $attributes, $type);
+        $this->boot($name, $value, 'textarea', $attributes);
     }
 
     /**

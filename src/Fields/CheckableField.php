@@ -20,9 +20,9 @@ class CheckableField extends InputField implements CheckableFieldInterface, Inpu
      * @param array $attributes        An array of attributes
      * @param string $type
      */
-    public function __construct($name, $value = 1, $id = null, $attributes = [], $type = 'checkbox')
+    public function __construct($name, $value = 1, $type = 'checkbox', $attributes = [])
     {
-        $this->boot($name, $value, $id, $attributes, $type);
+        $this->boot($name, $value, $type, $attributes);
     }
 
     /**

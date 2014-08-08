@@ -63,6 +63,7 @@ class Collection implements IteratorAggregate, Countable
 
         // guess field attributes
         $field = [
+            'id' => $fieldArray['Field'],
             'name' => $fieldArray['Field'],
             'value' => $fieldArray['Default'],
             'required' => (boolean) ($fieldArray['Null']=="NO")
@@ -84,29 +85,35 @@ class Collection implements IteratorAggregate, Countable
             case 'numeric':
             case 'serial':
                 if ($fieldArray['Key'] == 'PRI') {
-                    return new InputField($field, 'hidden');
+                    $field['type'] = 'hidden';
+                    return new InputField($field);
                 } else {
-                    return new InputField($field, 'number');
+                    $field['type'] = 'number';
+                    return new InputField($field);
                 }
                 break;
 
             case 'datetime':
             case 'timestamp':
-                return new InputField($field, 'datetime');
+                $field['type'] = 'datetime';
+                return new InputField($field);
                 break;
 
             case 'timetz':
             case 'timestamptz':
-                return new InputField($field, 'datetime-local');
+                $field['type'] = 'datetime--local';
+                return new InputField($field);
                 break;
 
             case 'time':
-                return new InputField($field, 'time');
+                $field['type'] = 'time';
+                return new InputField($field);
                 break;
 
             case 'date':
             case 'year':
-                return new InputField($field, 'date');
+                $field['type'] = 'date';
+                return new InputField($field);
                 break;
 
             case 'enum':
@@ -131,9 +138,11 @@ class Collection implements IteratorAggregate, Countable
 
             case 'uuid':
                 if ($fieldArray['Key'] == 'PRI') {
-                    return new InputField($field, 'hidden');
+                    $field['type'] = 'hidden';
+                    return new InputField($field);
                 } else {
-                    return new InputField($field, 'text');
+                    $field['type'] = 'text';
+                    return new InputField($field);
                 }
                 break;
 
@@ -141,7 +150,8 @@ class Collection implements IteratorAggregate, Countable
             case 'varchar':
             case 'tinyblob':
             default:
-                return new InputField($field, 'text');
+                $field['type'] = 'text';
+                return new InputField($field);
                 break;
         }
     }
