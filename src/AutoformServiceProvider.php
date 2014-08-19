@@ -1,6 +1,8 @@
 <?php namespace Tobz\Autoform;
 
+use Tobz\Autoform\Autoform;
 use Illuminate\Support\ServiceProvider;
+use App;
 
 class AutoformServiceProvider extends ServiceProvider
 {
@@ -19,7 +21,9 @@ class AutoformServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        App::bind('autoform', function () {
+            return new Autoform;
+        });
     }
 
     /**

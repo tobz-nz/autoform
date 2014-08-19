@@ -26,6 +26,19 @@ class Autoform implements IteratorAggregate, Countable
      */
     public function __construct($attributes = [], $fields = null)
     {
+        $this->make($attributes, $fields);
+    }
+
+    /**
+     * Set initial attribuets & fields
+     *
+     * @param array $attributes                          Attributes for the form element
+     * @param Tobz\Autoform\Fields\Collection $fields    A Collection of fields
+     *
+     * @return Tobz\Autoform\Autoform
+     */
+    public function make($attributes = [], $fields = null)
+    {
         $this->attributes = $attributes + $this->attributes;
 
         // add/create fields
@@ -34,6 +47,8 @@ class Autoform implements IteratorAggregate, Countable
         } else {
             $this->fields = new Collection();
         }
+
+        return $this;
     }
 
     /**
@@ -150,13 +165,24 @@ class Autoform implements IteratorAggregate, Countable
      *
      * @return string
      */
+    public function render()
+    {
+        return sprintf(
+            "%s\n%s\n%s",
+            $this->open(),
+            $this->fields,
+            $this->close()
+        );
+    }
+
+    /**
+     * Output the whole form in one go
+     *
+     * @return string
+     */
     public function __toString()
     {
-        return sprintf("%s\n%s\n%s", [
-            $this->open(),
-            $this->fields(),
-            $this->close()
-        ]);
+        return $this->render();
     }
 
     /**
