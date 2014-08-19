@@ -8,7 +8,7 @@ use Tobz\Autoform\Fields\Collection;
 use Tobz\Autoform\Autoform;
 use User;
 
-class FieldTest extends \TestCase
+class FieldTest extends \PHPUnit_Framework_TestCase
 {
     public function baseTests($field)
     {

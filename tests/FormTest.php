@@ -8,7 +8,7 @@ use Tobz\Autoform\Fields\Collection;
 use Tobz\Autoform\Autoform;
 use User;
 
-class FormTest extends \TestCase
+class FormTest extends \PHPUnit_Framework_TestCase
 {
 
     public function testForm()
