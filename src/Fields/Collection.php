@@ -4,8 +4,9 @@ use IteratorAggregate;
 use ArrayIterator;
 use Countable;
 use Tobz\Autoform\Contracts\FieldInterface;
+use Tobz\Autoform\Contracts\CollectionInterface;
 
-class Collection implements IteratorAggregate, Countable
+class Collection implements CollectionInterface
 {
     protected $fields = [];
 
@@ -42,6 +43,22 @@ class Collection implements IteratorAggregate, Countable
             $this->fields[$field->getId()] = $field;
         } else {
             throw new \RuntimeException('Cannot create field, Invalid Field Input');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Merge another Collection into this one
+     *
+     * @param  Tobz\Autoform\Fields\Collection $collection
+     *
+     * @return Tobz\Autoform\Fields\Collection
+     */
+    public function merge(CollectionInterface $collection)
+    {
+        foreach ($collection->fields as $field) {
+            $this->add($field);
         }
 
         return $this;
@@ -156,6 +173,11 @@ class Collection implements IteratorAggregate, Countable
         }
     }
 
+    /**
+     * Output all rendered Fields
+     *
+     * @return string
+     */
     public function __toString()
     {
         $output = [];
@@ -171,7 +193,7 @@ class Collection implements IteratorAggregate, Countable
      *
      * @param  string $value
      *
-     * @return FieldInterface|string|null
+     * @return FieldInterface|null
      */
     public function __get($value)
     {

@@ -113,7 +113,7 @@ class FieldTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function testFIeldCollection()
+    public function testFieldCollection()
     {
         $collection = new Collection(['field1' => new InputField('field1'), 'field2' => new CheckableField('field2')]);
         $this->assertCount(2, $collection);
@@ -122,16 +122,19 @@ class FieldTest extends \PHPUnit_Framework_TestCase
         $collection->add(new TextField('field5'));
         $this->assertCount(4, $collection);
 
-        $collection->add([
+        $field = [
             'Field' => 'test1',
             'Type' => "enum('user','admin')",
             'Null' => 'NO',
             'Key' => '',
             'Default' => '',
             'Extra' => ''
-        ]);
-
+        ];
+        $collection->add($field);
         $this->assertInstanceOf('Tobz\Autoform\Fields\SelectField', $collection->test1);
-        // dd((string) $selectField);
+
+        $field['Field'] = 'test5';
+        $collection->merge(new Collection([$field]));
+        $this->assertCount(6, $collection);
     }
 }

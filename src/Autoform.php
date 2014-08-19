@@ -102,10 +102,12 @@ class Autoform implements IteratorAggregate, Countable
      *
      * @return Autoform
      */
-    public function bind(DescribableInterface $model)
+    public function bind(Collection $Collection)
     {
-        foreach ($model->describe() as $field) {
-            $this->add($newFIeld);
+        if ($this->fields instanceof Collection) {
+            $this->collection->merge($collection);
+        } else {
+            $this->fields = $collection;
         }
 
         return $this;
