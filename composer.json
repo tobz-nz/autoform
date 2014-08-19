@@ -1,6 +1,7 @@
 {
     "name": "tobz/autoform",
-    "description": "",
+    "description": "A framework Agnostic form generator that tries to take the pain of building forms away.",
+    "licence": "MIT",
     "authors": [
         {
             "name": "Toby Evans",
