@@ -49,6 +49,34 @@ class Collection implements CollectionInterface
     }
 
     /**
+     * Check if a field exists
+     *
+     * @param  string  $value The name of the field
+     *
+     * @return boolean
+     */
+    public function has($value)
+    {
+        return array_key_exists($value, $this->fields);
+    }
+
+    /**
+     * Get a field if it exists
+     *
+     * @param  string $value The name of the field
+     *
+     * @return Tobz\Autoform\Contracts\FieldInterface|null
+     */
+    public function get($value)
+    {
+        if (array_key_exists($value, $this->fields)) {
+            return $this->fields[$value];
+        } else {
+            return null;
+        }
+    }
+
+    /**
      * Merge another Collection into this one
      *
      * @param  Tobz\Autoform\Fields\Collection $collection
@@ -197,12 +225,7 @@ class Collection implements CollectionInterface
      */
     public function __get($value)
     {
-        if (array_key_exists($value, $this->fields)) {
-            // find field & return it
-            return $this->fields[$value];
-        } else {
-            return null;
-        }
+        return $this->get($value);
     }
 
     /**
