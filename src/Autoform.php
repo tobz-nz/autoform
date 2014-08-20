@@ -203,14 +203,25 @@ class Autoform implements IteratorAggregate, Countable
      */
     public function __get($value)
     {
-        if (array_key_exists($value, $this->fields)) {
+        if ($this->fields->has($value)) {
             // find field & return it
-            return (string) $this->fields[$value];
+            return (string) $this->fields->get($value);
         } elseif (array_key_exists($value, $this->attributes)) {
             // else find a form attribute & return it
             return $this->attributes[$value];
         } else {
             return null;
+        }
+    }
+
+    public function __set($name, $value)
+    {
+        if ($value == 'fields' && $value instanceof CollectionInterface) {
+            $this->fields = $value;
+        } else if ($value instanceof FieldInterface) {
+            $this->fields->add($value);
+        } else if (is_string($value)) {
+            $this->attributes[$name] = $value;
         }
     }
 
