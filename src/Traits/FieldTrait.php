@@ -55,7 +55,6 @@ trait FieldTrait
         return $this->label;
     }
 
-
     /**
      * Set required attributes
      *
@@ -107,14 +106,19 @@ trait FieldTrait
      *
      * @return string
      */
-    public function renderLabel($value = null)
+    public function renderLabel($attributes = [], $value = null)
     {
         if ($value) {
             $this->setLabel($value);
         }
 
         if ($this->label) {
-            return sprintf('<label for="%s">%s</Label>', $this->getId(), $this->getLabel());
+            return sprintf(
+                '<label for="%s"%s>%s</Label>',
+                $this->getId(),
+                $this->attributesString($attributes),
+                $this->getLabel()
+            );
         }
     }
 
