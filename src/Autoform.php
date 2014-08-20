@@ -139,8 +139,15 @@ class Autoform implements IteratorAggregate, Countable
     public function getFields($list = [])
     {
         $output = [];
-        foreach ($this->fields as $field) {
-            if (!count($list) || in_array($field->getName(), $list)) {
+
+        if (count($list)) {
+            foreach ($list as $key) {
+                if ($this->fields->has($key)) {
+                    $output[] = $this->fields->get($key);
+                }
+            }
+        } else {
+            foreach ($this->fields as $field) {
                 $output[] = $field;
             }
         }
