@@ -17,6 +17,7 @@ class Autoform implements IteratorAggregate, Countable
         'action' => '',
         'method' => 'post',
     ];
+    public $submit = '<button type="submit">Submit</button>';
 
     /**
      * Create instance
@@ -168,9 +169,10 @@ class Autoform implements IteratorAggregate, Countable
     public function render()
     {
         return sprintf(
-            "%s\n%s\n%s",
+            "%s\n%s\n%s\n%s",
             $this->open(),
             $this->fields,
+            $this->submit,
             $this->close()
         );
     }
