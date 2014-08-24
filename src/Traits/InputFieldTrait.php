@@ -35,6 +35,12 @@ trait InputFieldTrait
             $this->setName($name);
         }
 
+        // set the label
+        if (array_key_exists('label', $this->attributes)) {
+            $this->setLabel($this->attributes['label']);
+            unset($this->attributes['label']);
+        }
+
         if (!$this->getId()) {
             $this->setId($this->getName());
         }
@@ -54,5 +60,15 @@ trait InputFieldTrait
         if (in_array($value, $this->types)) {
             $this->attributes['type'] = $value;
         }
+    }
+
+    /**
+     * Get the type
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return isset($this->attributes['type']) ? $this->attributes['type'] : null;
     }
 }

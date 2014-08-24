@@ -68,9 +68,4 @@ class InputField implements FieldInterface
             $this->attributeString(['type', 'id', 'name', 'value'])
         );
     }
-
-    public function getType()
-    {
-        return isset($this->attributes['type']) ? $this->attributes['type'] : null;
-    }
 }

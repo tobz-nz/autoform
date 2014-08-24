@@ -8,6 +8,7 @@ use Exception;
 
 class CheckableField extends InputField implements CheckableFieldInterface, InputFieldInterface, FieldInterface
 {
+
     protected $types = ['checkbox', 'radio'];
     protected $isCheckable = true;
 
@@ -22,7 +23,24 @@ class CheckableField extends InputField implements CheckableFieldInterface, Inpu
      */
     public function __construct($name, $value = 1, $type = 'checkbox', $attributes = [])
     {
+        if (!array_key_exists('label', $name) && !array_key_exists('label', $attributes)) {
+            $this->setLabel(ucwords(is_array($name) ? $name['name'] : $name));
+        }
+
         $this->boot($name, $value, $type, $attributes);
+    }
+
+    public function renderField()
+    {
+        return sprintf(
+            '<input type="%s" id="%s" name="%s" value="%s"%s%s />',
+            $this->getType(),
+            $this->getId(),
+            $this->getName(),
+            $this->getValue(),
+            $this->isChecked()?' checked':'',
+            $this->attributeString(['type', 'id', 'name', 'value', 'checked'])
+        );
     }
 
     /**
@@ -33,13 +51,10 @@ class CheckableField extends InputField implements CheckableFieldInterface, Inpu
     public function __toString()
     {
         return sprintf(
-            '<input type="%s" id="%s" name="%s" value="%s"%s%s />',
+            '<div class="%s-field">%s %s</div>',
             $this->getType(),
-            $this->getId(),
-            $this->getName(),
-            $this->getValue(),
-            $this->isChecked()?' checked':'',
-            $this->attributeString(['type', 'id', 'name', 'value', 'checked'])
+            $this->renderField(),
+            $this->renderLabel()
         );
     }
 

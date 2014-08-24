@@ -47,6 +47,10 @@ trait FieldTrait
 
     public function setLabel($value)
     {
+        if (array_key_exists('label', $this->attributes)) {
+            unset($this->attributes['label']);
+        }
+
         $this->label = $value;
     }
 
@@ -64,7 +68,7 @@ trait FieldTrait
      * @param array $attributes        An array of attributes
      * @param string $type
      */
-    private function boot($name, $value = '', $type = 'text', $attributes = [])
+    public function boot($name, $value = '', $type = 'text', $attributes = [])
     {
         // set the attributes array
         if (is_array($name)) {
@@ -116,7 +120,7 @@ trait FieldTrait
             return sprintf(
                 '<label for="%s"%s>%s</Label>',
                 $this->getId(),
-                $this->attributesString($attributes),
+                $this->attributeString($attributes),
                 $this->getLabel()
             );
         }

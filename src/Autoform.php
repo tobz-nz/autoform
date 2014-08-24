@@ -205,7 +205,7 @@ class Autoform implements IteratorAggregate, Countable
     {
         if ($this->fields->has($value)) {
             // find field & return it
-            return (string) $this->fields->get($value);
+            return $this->fields->get($value);
         } elseif (array_key_exists($value, $this->attributes)) {
             // else find a form attribute & return it
             return $this->attributes[$value];

@@ -19,6 +19,8 @@ interface FieldInterface
     public function getLabel();
     public function renderLabel();
 
+    public function attributeString();
+
     /**
      * Is this a checkable field?
      *
