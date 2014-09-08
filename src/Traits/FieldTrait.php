@@ -4,6 +4,8 @@ trait FieldTrait
 {
 
     protected $label = null;
+    protected $before = '';
+    protected $after = '';
     protected $booleanAttributes = [
         'spellcheck',
         'checked',
@@ -57,6 +59,39 @@ trait FieldTrait
     public function getLabel()
     {
         return $this->label;
+    }
+
+    public function wrap($before, $after = null)
+    {
+        if (is_array($before)) {
+            $this->setBefore($before[0]);
+            $this->setAfter($before[1]);
+        } else {
+            $this->setBefore($before);
+            if ($after) {
+                $this->setAfter($after);
+            }
+        }
+    }
+
+    public function setBefore($value)
+    {
+        $this->before = $value;
+    }
+
+    public function getBefore()
+    {
+        return $this->before;
+    }
+
+    public function setAfter($value)
+    {
+        $this->after = $value;
+    }
+
+    public function getAfter()
+    {
+        return $this->after;
     }
 
     /**

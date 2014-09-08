@@ -167,7 +167,7 @@ class Autoform implements IteratorAggregate, Countable
         $output = $this->getFields($renderList);
         if (count($wrapFields) === 2) {
             foreach ($output as &$field) {
-                $field = $wrapFields[0] . $field . $wrapFields[1];
+                $field->wrap($wrapFields);
             }
         }
         return implode("\n", $output);

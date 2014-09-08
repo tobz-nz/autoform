@@ -60,12 +60,14 @@ class InputField implements FieldInterface
     public function renderField()
     {
         return sprintf(
-            '<input type="%s" id="%s" name="%s" value="%s"%s />',
+            '%s<input type="%s" id="%s" name="%s" value="%s"%s />%s',
+            $this->getBefore(),
             $this->getType(),
             $this->getId(),
             $this->getName(),
             $this->getValue(),
-            $this->attributeString(['type', 'id', 'name', 'value'])
+            $this->attributeString(['type', 'id', 'name', 'value']),
+            $this->getAfter()
         );
     }
 }

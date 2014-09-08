@@ -21,6 +21,12 @@ interface FieldInterface
 
     public function attributeString();
 
+    public function wrap($before, $after = null);
+    public function setBefore($value);
+    public function getBefore();
+    public function setAfter($value);
+    public function getAfter();
+
     /**
      * Is this a checkable field?
      *
