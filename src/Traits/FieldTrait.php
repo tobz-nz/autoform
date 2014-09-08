@@ -73,7 +73,9 @@ trait FieldTrait
     {
         if (is_array($before)) {
             $this->setBefore($before[0]);
-            $this->setAfter($before[1]);
+            if (count($before)===2) {
+                $this->setAfter($before[1]);
+            }
         } else {
             $this->setBefore($before);
             if ($after) {
