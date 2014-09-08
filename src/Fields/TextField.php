@@ -55,7 +55,7 @@ class TextField implements InputFieldInterface, FieldInterface
 
     public function setType($value)
     {
-
+        return $this;
     }
 
     public function getType()

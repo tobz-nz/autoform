@@ -60,6 +60,8 @@ trait InputFieldTrait
         if (in_array($value, $this->types)) {
             $this->attributes['type'] = $value;
         }
+
+        return $this;
     }
 
     /**

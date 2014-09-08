@@ -67,6 +67,7 @@ class CheckableField extends InputField implements CheckableFieldInterface, Inpu
             $this->attributes['value'] = $value;
         }
 
+        return $this;
     }
 
     /**

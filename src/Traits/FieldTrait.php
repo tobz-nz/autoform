@@ -20,6 +20,8 @@ trait FieldTrait
     public function setId($value)
     {
         $this->attributes['id'] = $value;
+
+        return $this;
     }
 
     public function getId()
@@ -30,6 +32,8 @@ trait FieldTrait
     public function setName($value)
     {
         $this->attributes['name'] = $value;
+
+        return $this;
     }
 
     public function getName()
@@ -40,6 +44,8 @@ trait FieldTrait
     public function setValue($value)
     {
         $this->attributes['value'] = $value;
+
+        return $this;
     }
 
     public function getValue()
@@ -54,6 +60,8 @@ trait FieldTrait
         }
 
         $this->label = $value;
+
+        return $this;
     }
 
     public function getLabel()
@@ -72,11 +80,15 @@ trait FieldTrait
                 $this->setAfter($after);
             }
         }
+
+        return $this;
     }
 
     public function setBefore($value)
     {
         $this->before = $value;
+
+        return $this;
     }
 
     public function getBefore()
@@ -87,6 +99,8 @@ trait FieldTrait
     public function setAfter($value)
     {
         $this->after = $value;
+
+        return $this;
     }
 
     public function getAfter()
