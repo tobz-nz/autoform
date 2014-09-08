@@ -155,7 +155,7 @@ trait FieldTrait
             return sprintf(
                 '<label for="%s"%s>%s</Label>',
                 $this->getId(),
-                $this->attributeString($attributes),
+                $this->attributeString([], $attributes),
                 $this->getLabel()
             );
         }
@@ -177,10 +177,14 @@ trait FieldTrait
      *
      * @return string
      */
-    public function attributeString($exceptAttributes = [])
+    public function attributeString($exceptAttributes = [], $attributes = null)
     {
         $output = [];
-        foreach ($this->attributes as $key => $value) {
+        if ($attributes === null) {
+            $attributes = $this->attributes;
+        }
+
+        foreach ($attributes as $key => $value) {
             if (!in_array($key, $exceptAttributes)) {
                 // add filtered attribute
                 if (in_array($key, $this->booleanAttributes)) {
