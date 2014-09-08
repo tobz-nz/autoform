@@ -118,10 +118,10 @@ class Autoform implements IteratorAggregate, Countable
      *
      * @return Autoform
      */
-    public function bind(Collection $Collection)
+    public function bind(Collection $collection)
     {
         if ($this->fields instanceof Collection) {
-            $this->collection->merge($collection);
+            $this->fields->merge($collection);
         } else {
             $this->fields = $collection;
         }
