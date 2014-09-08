@@ -11,6 +11,8 @@ class CheckableField extends InputField implements CheckableFieldInterface, Inpu
 
     protected $types = ['checkbox', 'radio'];
     protected $isCheckable = true;
+    protected $before = '<div class="checkbox-field">';
+    protected $after = '</div>';
 
     /**
      * Set required attributes
@@ -47,10 +49,12 @@ class CheckableField extends InputField implements CheckableFieldInterface, Inpu
     public function __toString()
     {
         return sprintf(
-            '<div class="%s-field">%s %s</div>',
+            '%s<div class="%s-field">%s %s</div>%s',
+            $this->getBefore(),
             $this->getType(),
             $this->renderField(),
-            $this->renderLabel()
+            $this->renderLabel(),
+            $this->getAfter()
         );
     }
 
