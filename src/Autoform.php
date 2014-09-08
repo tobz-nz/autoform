@@ -221,7 +221,7 @@ class Autoform implements IteratorAggregate, Countable
 
     public function __set($name, $value)
     {
-        if ($value == 'fields' && $value instanceof CollectionInterface) {
+        if ($name == 'fields' && $value instanceof CollectionInterface) {
             $this->fields = $value;
         } else if ($value instanceof FieldInterface) {
             $this->fields->add($value);
