@@ -162,9 +162,14 @@ class Autoform implements IteratorAggregate, Countable
      *
      * @return string
      */
-    public function renderFields($renderList = [])
+    public function renderFields($renderList = [], $wrapFields = [])
     {
         $output = $this->getFields($renderList);
+        if (count($wrapFields) === 2) {
+            foreach ($output as &$field) {
+                $field = $wrapFields[0] . $field . $wrapFields[1];
+            }
+        }
         return implode("\n", $output);
     }
 
