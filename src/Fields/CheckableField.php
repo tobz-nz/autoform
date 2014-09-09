@@ -25,6 +25,10 @@ class CheckableField extends InputField implements CheckableFieldInterface, Inpu
      */
     public function __construct($name, $value = 1, $type = 'checkbox', $attributes = [])
     {
+        if (is_array($name) && !array_key_exists('label', $name) && !array_key_exists('label', $attributes)) {
+            $this->setLabel(ucwords(is_array($name) ? $name['name'] : $name));
+        }
+
         $this->boot($name, $value, $type, $attributes);
     }
 
