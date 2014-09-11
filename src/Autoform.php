@@ -45,6 +45,8 @@ class Autoform implements IteratorAggregate, Countable
         // add/create fields
         if ($fields instanceof Collection) {
             $this->fields = $fields;
+        } elseif (is_array($fields)) {
+            $this->fields = new Collection($fields);
         } else {
             $this->fields = new Collection();
         }
