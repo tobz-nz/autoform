@@ -88,7 +88,13 @@ class Autoform implements IteratorAggregate, Countable
             $attributes['enctype'] = 'multipart/form-data';
         }
 
-        return sprintf("<form%s>\n", $this->attributeString($attributes));
+        $method = '';
+        if (in_array($attributes['method'], ['put', 'delete'])) {
+            $method = sprintf('<input name="_method" type="hidden" value="%s" />', $attributes['method']);
+            $attributes['method'] = 'post';
+        }
+
+        return sprintf("<form%s>\n%s", $this->attributeString($attributes), $method);
     }
 
     /**
