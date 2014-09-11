@@ -10,6 +10,7 @@ class InputField implements FieldInterface
 
     protected $types = [
         'text',
+        'password',
         'image',
         'button',
         'submit',

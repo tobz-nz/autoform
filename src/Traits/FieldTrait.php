@@ -66,7 +66,9 @@ trait FieldTrait
 
     public function getLabel()
     {
-        return $this->label;
+        if ($this->getType() !== 'hidden') {
+            return $this->label;
+        }
     }
 
     public function wrap($before, $after = null)
@@ -236,5 +238,23 @@ trait FieldTrait
     public function isSelectable()
     {
         return $this->isSelectable;
+    }
+
+    /**
+     * handle misc set* methods to set attributes
+     *
+     * @param  string $method The method name
+     * @param  mixed $input  The method input
+     *
+     * @return Tobz\Autoform\Contracts\FieldInterface
+     */
+    public function __call($method, $input)
+    {
+        if (preg_match('/^set([A-Z][a-z]*)/ui', $method, $matches)) {
+            $attribute = $matches[1];
+            $this->attributes[strtolower($attribute)] = current($input);
+        }
+
+        return $this;
     }
 }

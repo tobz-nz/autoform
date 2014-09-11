@@ -45,11 +45,13 @@ class SelectField implements FieldInterface, SelectFieldInterface
     public function renderField()
     {
         return sprintf(
-            "<select id=\"%s\" name=\"%s\"%s>\n%s\n</select>",
+            "%s<select id=\"%s\" name=\"%s\"%s>\n%s\n</select>%s",
+            $this->getBefore(),
             $this->getId(),
             $this->getName(),
             $this->attributeString(['id', 'name', 'value']),
-            $this->renderOptions()
+            $this->renderOptions(),
+            $this->getAfter()
         );
     }
 

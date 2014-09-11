@@ -45,11 +45,13 @@ class TextField implements InputFieldInterface, FieldInterface
     public function renderField()
     {
         return sprintf(
-            '<textarea id="%s" name="%s"%s>%s</textarea>',
+            '%s<textarea id="%s" name="%s"%s>%s</textarea>%s',
+            $this->getBefore(),
             $this->getId(),
             $this->getName(),
             $this->attributeString(['id', 'name', 'value']),
-            $this->getValue()
+            $this->getValue(),
+            $this->getAfter()
         );
     }
 

@@ -42,7 +42,7 @@ class Collection implements CollectionInterface
         if ($field instanceof FieldInterface) {
             $this->fields[$field->getId()] = $field;
         } else {
-            throw new \RuntimeException('Cannot create field, Invalid Field Input');
+            throw new \RuntimeException('Cannot create field, Invalid Input');
         }
 
         return $this;

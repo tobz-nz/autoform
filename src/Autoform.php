@@ -109,6 +109,15 @@ class Autoform implements IteratorAggregate, Countable
         return "</form>\n";
     }
 
+    public function setValues($input = [])
+    {
+        foreach ($input as $key => $value) {
+            if ($this->$key instanceof FieldInterface) {
+                $this->$key->setValue($value);
+            }
+        }
+    }
+
     /**
      * Add a field
      *
@@ -186,12 +195,12 @@ class Autoform implements IteratorAggregate, Countable
      *
      * @return string
      */
-    public function render()
+    public function render($renderList = [], $wrapFields = [])
     {
         return sprintf(
             "%s\n%s\n%s\n%s",
             $this->open(),
-            $this->fields,
+            $this->renderFields($renderList, $wrapFields),
             $this->submit,
             $this->close()
         );
@@ -236,6 +245,24 @@ class Autoform implements IteratorAggregate, Countable
         } else if (is_string($value)) {
             $this->attributes[$name] = $value;
         }
+    }
+
+    /**
+     * handle misc set* methods to set attributes
+     *
+     * @param  string $method The method name
+     * @param  mixed $input  The method input
+     *
+     * @return Tobz\Autoform\Autform
+     */
+    public function __call($method, $input)
+    {
+        if (preg_match('/^set([A-Z][a-z]*)/ui', $method, $matches)) {
+            $attribute = $matches[1];
+            $this->attributes[strtolower($attribute)] = current($input);
+        }
+
+        return $this;
     }
 
     /**
