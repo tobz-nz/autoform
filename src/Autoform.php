@@ -176,6 +176,7 @@ class Autoform implements IteratorAggregate, Countable
      * Render the forms fields
      *
      * @param  array $renderList list of field id's to render
+     * @param  array $wrapFields before/after array to wrap around all fields
      *
      * @return string
      */
