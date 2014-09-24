@@ -146,7 +146,7 @@ class Collection implements CollectionInterface
 
             case 'timetz':
             case 'timestamptz':
-                $field['type'] = 'datetime--local';
+                $field['type'] = 'datetime-local';
                 return new InputField($field);
                 break;
 
