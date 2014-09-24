@@ -117,6 +117,10 @@ class Collection implements CollectionInterface
         $type = preg_replace('/\(.+$/ui', '', $fieldArray['Type']);
         switch (strToLower($type)) {
             case 'tinyint':
+                $field['type'] = $fieldArray['Key'] == 'PRI' ? 'hidden' : 'checkbox';
+                return new CheckableField($field);
+                break;
+
             case 'smallint':
             case 'mediumint':
             case 'integer':
