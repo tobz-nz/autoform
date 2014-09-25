@@ -114,7 +114,10 @@ class Collection implements CollectionInterface
             'required' => (boolean) ($fieldArray['Null']=="NO")
         ];
 
+        // strip length
         $type = preg_replace('/\(.+$/ui', '', $fieldArray['Type']);
+
+        // take an educated guess at the correct field type
         switch (strToLower($type)) {
             case 'tinyint':
                 $field['type'] = $fieldArray['Key'] == 'PRI' ? 'hidden' : 'checkbox';
@@ -138,6 +141,7 @@ class Collection implements CollectionInterface
                     return new InputField($field);
                 } else {
                     $field['type'] = 'number';
+                    $this->addMaxLength($field, $fieldArray['Type']);
                     return new InputField($field);
                 }
                 break;
@@ -182,6 +186,8 @@ class Collection implements CollectionInterface
             case 'longblob':
             case 'longtext':
             case 'xml':
+            case 'texetarea':
+                $this->addMaxLength($field, $fieldArray['Type']);
                 return new TextField($field, 'text');
                 break;
 
@@ -191,6 +197,7 @@ class Collection implements CollectionInterface
                     return new InputField($field);
                 } else {
                     $field['type'] = 'text';
+                    $this->addMaxLength($field, $fieldArray['Type']);
                     return new InputField($field);
                 }
                 break;
@@ -199,9 +206,18 @@ class Collection implements CollectionInterface
             case 'varchar':
             case 'tinyblob':
             default:
+                $this->addMaxLength($field, $fieldArray['Type']);
                 $field['type'] = 'text';
                 return new InputField($field);
                 break;
+        }
+    }
+
+    public function addMaxLength(&$field, $type)
+    {
+        // get length
+        if (preg_match('/\(([0-9]+)\)$/ui', $type, $matches)) {
+            $field['maxlength'] = $matches[1];
         }
     }
 
