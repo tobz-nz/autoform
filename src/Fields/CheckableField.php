@@ -72,7 +72,7 @@ class CheckableField extends InputField implements CheckableFieldInterface, Inpu
             $this->attributes['value'] = $value[0];
             $this->check((boolean) $value[1]);
         } else {
-            $this->attributes['value'] = $value;
+            $this->attributes['value'] = is_null($value) ? 1 : $value;
         }
 
         return $this;
@@ -85,7 +85,7 @@ class CheckableField extends InputField implements CheckableFieldInterface, Inpu
      */
     public function check($value)
     {
-        $this->attributes['checked'] = $value;
+        $this->attributes['checked'] = (boolean) $value;
     }
 
     /**
