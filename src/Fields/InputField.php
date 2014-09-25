@@ -8,7 +8,7 @@ class InputField implements FieldInterface
 {
     use \Tobz\Autoform\Traits\InputFieldTrait;
 
-    protected $types = [
+    static public $types = [
         'text',
         'password',
         'image',

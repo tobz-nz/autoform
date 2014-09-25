@@ -9,7 +9,7 @@ class TextField implements InputFieldInterface, FieldInterface
 {
     use \Tobz\Autoform\Traits\FieldTrait;
 
-    protected $types = ['textarea'];
+    public static $types = ['textarea'];
 
     protected $isCheckable = false;
     protected $isSelectable = false;

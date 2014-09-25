@@ -17,6 +17,11 @@ trait FieldTrait
         'required',
     ];
 
+    public function getTypes()
+    {
+        return static::$types;
+    }
+
     public function setId($value)
     {
         $this->attributes['id'] = $value;

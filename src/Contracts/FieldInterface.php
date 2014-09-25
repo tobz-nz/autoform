@@ -7,6 +7,13 @@ interface FieldInterface
     public function renderField();
 
     /**
+     * Get the types of this field
+     *
+     * @return array
+     */
+    public function getTypes();
+
+    /**
      * Set
      * @param string $value
      *

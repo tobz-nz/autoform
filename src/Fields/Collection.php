@@ -207,7 +207,7 @@ class Collection implements CollectionInterface
             case 'tinyblob':
             default:
                 $this->addMaxLength($field, $fieldArray['Type']);
-                $field['type'] = 'text';
+                $field['type'] = in_array($type, InputField::$types) ? $type : 'text';
                 return new InputField($field);
                 break;
         }

@@ -9,7 +9,7 @@ use Exception;
 class CheckableField extends InputField implements CheckableFieldInterface, InputFieldInterface, FieldInterface
 {
 
-    protected $types = ['checkbox', 'radio'];
+    public static $types = ['checkbox', 'radio'];
     protected $isCheckable = true;
     protected $before = '<div class="checkbox-field">';
     protected $after = '</div>';

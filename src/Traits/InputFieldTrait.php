@@ -57,7 +57,7 @@ trait InputFieldTrait
      */
     public function setType($value)
     {
-        if (in_array($value, $this->types)) {
+        if (in_array($value, $this->getTypes())) {
             $this->attributes['type'] = $value;
         }
 
