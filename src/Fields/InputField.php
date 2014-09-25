@@ -12,6 +12,7 @@ class InputField implements FieldInterface
         'text',
         'password',
         'image',
+        'file',
         'button',
         'submit',
         'search',
