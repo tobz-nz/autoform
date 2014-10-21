@@ -72,7 +72,7 @@ trait FieldTrait
     public function getLabel()
     {
         if ($this->getType() !== 'hidden') {
-            return $this->label;
+            return ucwords(str_replace('_', ' ', $this->label));
         }
     }
 
