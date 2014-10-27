@@ -93,6 +93,48 @@ trait FieldTrait
         return $this;
     }
 
+    /**
+     * Add a class to the class attribute
+     *
+     * @param string $class
+     *
+     * @return Tobz\Autoform\Contracts\FieldInterface
+     */
+    public function addClass($class)
+    {
+        if (!isset($this->attributes['class'])) {
+            $this->attributes['class'] = $class;
+        } else {
+            $classes = explode(' ', $this->attributes['class']);
+            if (!in_array($class, $classes)) {
+                $this->attributes['class'] += " $class";
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * Remove a class from the class attribute
+     *
+     * @param  string $class
+     *
+     * @return Tobz\Autoform\Contracts\FieldInterface
+     */
+    public function removeClass($class)
+    {
+        if (isset($this->attributes['class'])) {
+            $classes = explode(' ', $this->attributes['class']);
+            $key = array_search($class, $classes);
+            if ($key) {
+                unset($classes[$key]);
+                $this->attributes['class'] = implode(' ', $classes);
+            }
+        }
+
+        return $this;
+    }
+
     public function setBefore($value)
     {
         $this->before = $value;
@@ -186,11 +228,15 @@ trait FieldTrait
 
     public function __toString()
     {
-        $output = implode("\n", [
-            $this->renderLabel(),
-            $this->renderField(),
-        ]);
-        return trim($output, "\n");
+        try {
+            $output = implode("\n", [
+                $this->renderLabel(),
+                $this->renderField(),
+            ]);
+            return trim($output, "\n");
+        } catch (\Exception $e) {
+            dd($e->getMessage() .' '. $e->getFile() .' #'. $e->getLine());
+        }
     }
 
     /**
