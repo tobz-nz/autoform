@@ -11,6 +11,7 @@ class SelectField implements FieldInterface, SelectFieldInterface
 
     protected $isCheckable = false;
     protected $isSelectable = true;
+    protected $hasEmptyValue = false;
 
     protected $attributes = [
         'id' => null,
@@ -35,6 +36,20 @@ class SelectField implements FieldInterface, SelectFieldInterface
         $attributes = $this->attributes + $attributes; // Include default attribute
         $this->boot($name, $value, $id, $attributes, $type);
         $this->options = $options;
+    }
+
+    /**
+     * Set the hasEmptyValue setting
+     *
+     * @param  boolean  $value
+     *
+     * @return Tobz\Autoform\Fields\SelectField
+     */
+    public function hasEmpty($value)
+    {
+        $this->hasEmptyValue = $value;
+
+        return $this;
     }
 
     /**
@@ -65,6 +80,7 @@ class SelectField implements FieldInterface, SelectFieldInterface
         $output = [];
         foreach ($this->options as $key => $value) {
             $selected = ($this->attributes['value'] == $key ? ' selected' : '');
+            $key = $this->hasEmptyValue ? ($key?:'') : $key;
             $output[] = sprintf('<option value="%s"%s>%s</option>', $key, $selected, $value);
         }
 
