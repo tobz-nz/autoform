@@ -137,7 +137,7 @@ trait FieldTrait
 
     public function setBefore($value)
     {
-        $this->before = $value;
+        $this->before .= $value;
 
         return $this;
     }
@@ -149,7 +149,7 @@ trait FieldTrait
 
     public function setAfter($value)
     {
-        $this->after = $value;
+        $this->after .= $value;
 
         return $this;
     }
