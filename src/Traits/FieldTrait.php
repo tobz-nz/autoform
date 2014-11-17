@@ -14,6 +14,7 @@ trait FieldTrait
         'hidden',
         'novalidate',
         'readonly',
+        'multiple',
         'required',
     ];
 
