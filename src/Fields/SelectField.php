@@ -102,7 +102,7 @@ class SelectField implements FieldInterface, SelectFieldInterface
             return in_array($key, $value);
         }
 
-        return $this->getValue() === $key;
+        return $this->getValue() == $key;
     }
 
     /**
