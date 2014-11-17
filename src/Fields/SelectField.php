@@ -79,12 +79,30 @@ class SelectField implements FieldInterface, SelectFieldInterface
     {
         $output = [];
         foreach ($this->options as $key => $value) {
-            $selected = ($this->attributes['value'] == $key ? ' selected' : '');
+            $selected = ($this->isSelected($key) ? ' selected' : '');
             $key = $this->hasEmptyValue ? ($key?:'') : $key;
             $output[] = sprintf('<option value="%s"%s>%s</option>', $key, $selected, $value);
         }
 
         return implode("\n", $output);
+    }
+
+    /**
+     * Check if a key/value should be selected
+     *
+     * @param  string|array  $key
+     *
+     * @return boolean
+     */
+    public function isSelected($key)
+    {
+        $value = $this->getValue();
+
+        if (is_array($value)) {
+            return in_array($key, $value);
+        }
+
+        return $this->getValue() === $key;
     }
 
     /**
