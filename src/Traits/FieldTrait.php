@@ -328,9 +328,17 @@ trait FieldTrait
             return $this->attributes[strtolower("data-$attribute")];
         }
 
+        // Set an attribute value
         if (preg_match('/^set([A-Z][a-z]*)/ui', $method, $matches)) {
             $attribute = $matches[1];
             $this->attributes[strtolower($attribute)] = current($input);
+            return $this;
+        }
+
+        // get an attribute value
+        if (preg_match('/^get([A-Z][a-z]*)/ui', $method, $matches)) {
+            $attribute = $matches[1];
+            return $this->attributes[strtolower($attribute)];
         }
 
         return $this;
