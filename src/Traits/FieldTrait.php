@@ -315,6 +315,19 @@ trait FieldTrait
      */
     public function __call($method, $input)
     {
+        // get an attribute value
+        if (preg_match('/^setData([A-Z][a-z]*)/ui', $method, $matches)) {
+            $attribute = $matches[1];
+            $this->attributes[strtolower("data-$attribute")] = current($input);
+            return $this;
+        }
+
+        // get an attribute value
+        if (preg_match('/^getData([A-Z][a-z]*)/ui', $method, $matches)) {
+            $attribute = $matches[1];
+            return $this->attributes[strtolower("data-$attribute")];
+        }
+
         if (preg_match('/^set([A-Z][a-z]*)/ui', $method, $matches)) {
             $attribute = $matches[1];
             $this->attributes[strtolower($attribute)] = current($input);
