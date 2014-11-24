@@ -12,6 +12,7 @@ class SelectField implements FieldInterface, SelectFieldInterface
     protected $isCheckable = false;
     protected $isSelectable = true;
     protected $hasEmptyValue = false;
+    static public $types = ['select'];
 
     protected $attributes = [
         'id' => null,
@@ -31,10 +32,10 @@ class SelectField implements FieldInterface, SelectFieldInterface
      * @param array $attributes        An array of attributes
      * @param string $type
      */
-    public function __construct($name, $options, $value = '', $id = null, $attributes = [], $type = 'text')
+    public function __construct($name, $options, $value = '', $attributes = [])
     {
         $attributes = $this->attributes + $attributes; // Include default attribute
-        $this->boot($name, $value, $id, $attributes, $type);
+        $this->boot($name, $value, 'select', $attributes);
         $this->options = $options;
     }
 
