@@ -232,7 +232,7 @@ trait FieldTrait
 
         if ($this->label) {
             return sprintf(
-                '<label for="%s"%s>%s</Label>',
+                '<label for="%s"%s>%s</label>',
                 $this->getId(),
                 $this->attributeString([], $attributes),
                 $this->getLabel()
