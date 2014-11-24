@@ -64,6 +64,7 @@ class CheckableField extends InputField implements CheckableFieldInterface, Inpu
 
     /**
      * Set the fields value & maybe checked status
+     *
      * @param string|array $value Either a string value of array ['value', 'checked']. eg: ['active', true]
      */
     public function setValue($value)
@@ -72,7 +73,7 @@ class CheckableField extends InputField implements CheckableFieldInterface, Inpu
             $this->attributes['value'] = $value[0];
             $this->check((boolean) $value[1]);
         } else {
-            $this->attributes['value'] = is_null($value) ? 1 : $value;
+            $this->attributes['value'] = $value?:1;
         }
 
         return $this;
