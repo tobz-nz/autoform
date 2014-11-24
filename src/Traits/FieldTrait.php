@@ -139,7 +139,8 @@ trait FieldTrait
         if (isset($this->attributes['class'])) {
             $classes = explode(' ', $this->attributes['class']);
             $key = array_search($class, $classes);
-            if ($key) {
+
+            if ($key!==false) {
                 unset($classes[$key]);
                 $this->attributes['class'] = implode(' ', $classes);
             }
