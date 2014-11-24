@@ -151,7 +151,7 @@ trait FieldTrait
 
     public function setBefore($value)
     {
-        $this->before .= $value;
+        $this->before = $value.$this->before;
 
         return $this;
     }
