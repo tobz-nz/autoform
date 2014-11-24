@@ -116,6 +116,18 @@ trait FieldTrait
     }
 
     /**
+     * Check if the field has the given classname
+     *
+     * @param  string  $class The class to check
+     *
+     * @return boolean
+     */
+    public function hasClass($class)
+    {
+        return isset($this->attributes['class']) && in_array($class, explode(' ', $this->attributes['class']));
+    }
+
+    /**
      * Remove a class from the class attribute
      *
      * @param  string $class
