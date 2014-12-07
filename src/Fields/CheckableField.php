@@ -96,6 +96,6 @@ class CheckableField extends InputField implements CheckableFieldInterface, Inpu
      */
     public function isChecked()
     {
-        return isset($this->attributes['checked']) && $this->attributes['checked'];
+        return isset($this->attributes['checked']) && $this->attributes['checked'] == true;
     }
 }

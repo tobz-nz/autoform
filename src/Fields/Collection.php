@@ -27,7 +27,8 @@ class Collection implements CollectionInterface
     }
 
     /**
-     * Add a new field to the collection. $field must either be an instance of FieldInterface, or an array with this footprint: ['Field', 'Type', 'Null', 'Key', 'Default', 'Extra']
+     * Add a new field to the collection. $field must either be an instance of FieldInterface,
+     * or an array with this footprint: ['Field', 'Type', 'Null', 'Key', 'Default', 'Extra']
      *
      * @param Tobz\Autoform\Contracts\FieldInterface|array $field
      *
