@@ -338,7 +338,7 @@ trait FieldTrait
         // get an attribute value
         if (preg_match('/^get([A-Z][a-z]*)/ui', $method, $matches)) {
             $attribute = $matches[1];
-            return $this->attributes[strtolower($attribute)];
+            return isset($this->attributes[strtolower($attribute)]) ? $this->attributes[strtolower($attribute)] : null;
         }
 
         return $this;
