@@ -82,7 +82,7 @@ class Autoform implements IteratorAggregate, Countable
      */
     public function open($attributes = [], $sendFiles = false)
     {
-        $attributes = array_merge($attributes, $this->attributes);
+        $attributes = array_merge($this->attributes, $attributes);
 
         if ($sendFiles) {
             $attributes['enctype'] = 'multipart/form-data';
