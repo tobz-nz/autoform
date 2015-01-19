@@ -21,7 +21,6 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("</form>\n", $autoform->close());
         $this->assertCount(0, $autoform);
 
-
         $field = [
             'Field' => 'test1',
             'Type' => "int(100)",
@@ -33,7 +32,10 @@ class FormTest extends \PHPUnit_Framework_TestCase
 
         $autoform = new Autoform(['action' => '/save'], new Collection([$field]));
         $this->assertCount(1, $autoform);
-        $this->assertEquals('<input type="hidden" id="test1" name="test1" value="0" required />', $autoform->renderFields());
+        $this->assertEquals(
+            '<input type="hidden" id="test1" name="test1" value="0" required />',
+            $autoform->renderFields()
+        );
 
         $autoform->add(new InputField('test2'));
         $this->assertEquals(
@@ -42,6 +44,9 @@ class FormTest extends \PHPUnit_Framework_TestCase
             $autoform->renderFields()
         );
 
-        $this->assertEquals('<input type="text" id="test2" name="test2" value="" />', $autoform->renderFields(['test2']));
+        $this->assertEquals(
+            '<input type="text" id="test2" name="test2" value="" />',
+            $autoform->renderFields(['test2'])
+        );
     }
 }
