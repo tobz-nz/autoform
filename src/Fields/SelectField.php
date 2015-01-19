@@ -46,7 +46,7 @@ class SelectField implements FieldInterface, SelectFieldInterface
      *
      * @return Tobz\Autoform\Fields\SelectField
      */
-    public function hasEmpty($value)
+    public function hasEmptyValue($value)
     {
         $this->hasEmptyValue = $value;
 
@@ -81,8 +81,12 @@ class SelectField implements FieldInterface, SelectFieldInterface
         $output = [];
         foreach ($this->options as $key => $value) {
             $selected = ($this->isSelected($key) ? ' selected' : '');
-            $key = $this->hasEmptyValue ? ($key?:'') : $key;
-            $output[] = sprintf('<option value="%s"%s>%s</option>', $key, $selected, $value);
+
+            if ($key === 0 && $this->hasEmptyValue === true) {
+                $output[] = sprintf('<option%s>%s</option>', $selected, $value);
+            } else {
+                $output[] = sprintf('<option value="%s"%s>%s</option>', $key, $selected, $value);
+            }
         }
 
         return implode("\n", $output);
