@@ -5,6 +5,8 @@ use ArrayIterator;
 use Countable;
 use Tobz\Autoform\Contracts\FieldInterface;
 use Tobz\Autoform\Contracts\CollectionInterface;
+use Tobz\Autoform\Exceptions\InvalidFieldException;
+use Tobz\Autoform\Exceptions\InvalidFieldSignatureException;
 
 class Collection implements CollectionInterface
 {
@@ -40,11 +42,11 @@ class Collection implements CollectionInterface
             $field = $this->createField($field);
         }
 
-        if ($field instanceof FieldInterface) {
-            $this->fields[$field->getId()] = $field;
-        } else {
-            throw new \RuntimeException('Cannot create field, Invalid Input');
+        if (!$field instanceof FieldInterface) {
+            throw new InvalidFieldException('Cannot create field, Invalid Input');
         }
+
+        $this->fields[$field->getId()] = $field;
 
         return $this;
     }
@@ -104,7 +106,7 @@ class Collection implements CollectionInterface
     {
 
         if (array_keys($fieldArray) !== ['Field', 'Type', 'Null', 'Key', 'Default', 'Extra']) {
-            throw new \RuntimeException('Cannot create field, Invalid Field Input');
+            throw new InvalidFieldSignatureException('Cannot create field, Invalid Field Input');
         }
 
         // guess field attributes
