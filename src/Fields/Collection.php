@@ -98,14 +98,20 @@ class Collection implements CollectionInterface
     /**
      * Create a field from an array
      *
-     * @param  array $fieldArray The array must have this footprint: ['Field','Type','Null','Key','Default','Extra']
+     * @param  array $fieldArray The array must have this signature: ['Field','Type','Null','Key','Default','Extra']
      *
      * @return Tobz\Autoform\Contracts\FieldInterface
      */
     public function createField($fieldArray)
     {
 
-        if (array_keys($fieldArray) !== ['Field', 'Type', 'Null', 'Key', 'Default', 'Extra']) {
+        // validate $fieldArray signature
+        $requiredKeys = ['Field', 'Type', 'Null', 'Key', 'Default', 'Extra'];
+        $fieldKeys = array_keys($fieldArray);
+        sort($requiredKeys);
+        sort($fieldKeys);
+
+        if ($requiredKeys !== $fieldKeys) {
             throw new InvalidFieldSignatureException('Cannot create field, Invalid Field Input');
         }
 
