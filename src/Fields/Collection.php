@@ -191,7 +191,7 @@ class Collection implements CollectionInterface
             case 'longblob':
             case 'longtext':
             case 'xml':
-            case 'texetarea':
+            case 'textarea':
                 $this->addMaxLength($field, $fieldArray['Type']);
                 return new TextField($field, 'text');
 
