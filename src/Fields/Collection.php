@@ -215,6 +215,12 @@ class Collection implements CollectionInterface
         }
     }
 
+    /**
+     * set a maxlength based on a field size
+     *
+     * @param array &$field The field array
+     * @param string $type   The 'Type' to check. eg: varchar(50)
+     */
     public function addMaxLength(&$field, $type)
     {
         // get length
