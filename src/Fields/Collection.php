@@ -130,8 +130,10 @@ class Collection implements CollectionInterface
         switch (strToLower($type)) {
             case 'tinyint':
                 $field['type'] = $fieldArray['Key'] == 'PRI' ? 'hidden' : 'checkbox';
-                return new CheckableField($field);
-                break;
+                if ($field['type'] == 'checkbox') {
+                    return new CheckableField($field);
+                }
+                return new InputField($field);
 
             case 'smallint':
             case 'mediumint':
