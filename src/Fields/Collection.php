@@ -150,35 +150,30 @@ class Collection implements CollectionInterface
                 if ($fieldArray['Key'] == 'PRI') {
                     $field['type'] = 'hidden';
                     return new InputField($field);
-                } else {
-                    $field['type'] = 'number';
-                    $this->addMaxLength($field, $fieldArray['Type']);
-                    return new InputField($field);
                 }
-                break;
+
+                $field['type'] = 'number';
+                $this->addMaxLength($field, $fieldArray['Type']);
+                return new InputField($field);
 
             case 'datetime':
             case 'timestamp':
                 $field['type'] = 'datetime';
                 return new InputField($field);
-                break;
 
             case 'timetz':
             case 'timestamptz':
                 $field['type'] = 'datetime-local';
                 return new InputField($field);
-                break;
 
             case 'time':
                 $field['type'] = 'time';
                 return new InputField($field);
-                break;
 
             case 'date':
             case 'year':
                 $field['type'] = 'date';
                 return new InputField($field);
-                break;
 
             case 'enum':
             case 'set':
@@ -188,7 +183,6 @@ class Collection implements CollectionInterface
                 $options = explode("','", trim($matches[1], "'"));
                 $options = array_combine($options, $options);
                 return new SelectField($field, $options);
-                break;
 
             case 'blob':
             case 'text':
@@ -200,18 +194,16 @@ class Collection implements CollectionInterface
             case 'texetarea':
                 $this->addMaxLength($field, $fieldArray['Type']);
                 return new TextField($field, 'text');
-                break;
 
             case 'uuid':
                 if ($fieldArray['Key'] == 'PRI') {
                     $field['type'] = 'hidden';
                     return new InputField($field);
-                } else {
-                    $field['type'] = 'text';
-                    $this->addMaxLength($field, $fieldArray['Type']);
-                    return new InputField($field);
                 }
-                break;
+
+                $field['type'] = 'text';
+                $this->addMaxLength($field, $fieldArray['Type']);
+                return new InputField($field);
 
             case 'char':
             case 'varchar':
@@ -220,7 +212,6 @@ class Collection implements CollectionInterface
                 $this->addMaxLength($field, $fieldArray['Type']);
                 $field['type'] = in_array($type, InputField::$types) ? $type : 'text';
                 return new InputField($field);
-                break;
         }
     }
 
