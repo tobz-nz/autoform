@@ -87,6 +87,8 @@ class CheckableField extends InputField implements CheckableFieldInterface, Inpu
     public function check($value)
     {
         $this->attributes['checked'] = (boolean) $value;
+        
+        return $this;
     }
 
     /**
