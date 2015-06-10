@@ -106,10 +106,9 @@ trait FieldTrait
         if (!isset($this->attributes['class'])) {
             $this->attributes['class'] = $class;
         } else {
-            $classes = explode(' ', $this->attributes['class']);
-            if (!in_array($class, $classes)) {
-                $this->attributes['class'] += " $class";
-            }
+            $currentClasses = explode(' ', $this->attributes['class']);
+            $newClasses = explode(' ', $class);
+            $this->attributes['class'] = implode(' ', array_merge($currentClasses, $newClasses));
         }
 
         return $this;
