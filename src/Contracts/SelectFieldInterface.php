@@ -8,4 +8,13 @@ interface SelectFieldInterface extends FieldInterface
      * @return array ['value' => 'text']
      */
     public function getOptions();
+
+    /**
+     * Set options
+     *
+     * @param array $options ['value' => 'text']
+     *
+     * @return Tobz\Autoform\SelectFieldInterface
+     */
+    public function setOptions(array $options);
 }

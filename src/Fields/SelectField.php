@@ -32,7 +32,7 @@ class SelectField implements FieldInterface, SelectFieldInterface
      * @param array $attributes        An array of attributes
      * @param string $type
      */
-    public function __construct($name, $options, $value = '', $attributes = [])
+    public function __construct($name, array $options, $value = '', $attributes = [])
     {
         $attributes = $this->attributes + $attributes; // Include default attribute
         $this->boot($name, $value, 'select', $attributes);
@@ -111,6 +111,16 @@ class SelectField implements FieldInterface, SelectFieldInterface
     }
 
     /**
+     * Set the options array
+     *
+     * @return array
+     */
+    public function setOptions(array $options)
+    {
+        return $this->options = $options;
+    }
+
+    /**
      * Get the options array
      *
      * @return array
@@ -118,5 +128,15 @@ class SelectField implements FieldInterface, SelectFieldInterface
     public function getOptions()
     {
         return $this->options;
+    }
+
+    /**
+     * Get the field type
+     *
+     * @return array
+     */
+    public function getType()
+    {
+        return 'select';
     }
 }
